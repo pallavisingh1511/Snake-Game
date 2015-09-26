@@ -47,7 +47,7 @@ canvas{
 }
 
 #overlay{
-    /*display:none;*/
+    display:none;
     color: #ffffff;
     font-size: 25px;
     text-align: center;

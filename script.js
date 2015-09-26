@@ -8,6 +8,7 @@ $(document).ready(function(){
     var d = "right";
     var food;
     var score;
+    var color = "green";
     var speed = 130;
     
     //Snake Array
@@ -19,7 +20,7 @@ $(document).ready(function(){
         create_food();
         score = 0;
         
-        if(type game_loop != "undefined") clearInterval(game_loop);
+        if(typeof game_loop != "undefined") clearInterval(game_loop);
         game_loop = setInterval(paint, speed);
     }
     
@@ -58,9 +59,9 @@ $(document).ready(function(){
         else if (d == 'up') ny--;
         else if (d == 'down') ny++;   
         
-        if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array){
+        if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array)){
                 init();
-            return;
+                return;
            }
     
         if(nx == food.x && ny == food.y){
@@ -86,4 +87,29 @@ $(document).ready(function(){
     //Check Score
     checkscore(score);
     }
+    
+    //Create Paint Cell
+    function paint_cell(x, y){
+        ctx.fillStyle = color;
+        ctx.fillRect(x * cw, y * cw, cw, cw);
+        ctx.strokeStyle = "white";
+        ctx.strokeRect(x * cw, y * cw, cw, cw);
+    }
+    
+    //Create Check Collision
+    function check_collision(x, y, array){
+        for(var i = 0; i < array.length;i++){
+            if(array[i].x == x && array[i].y == y)
+                return true;
+        }
+        return false;
+    }
+    
+    
+    
+    //Create checkscore
+    function checkscore(){
+        
+    }
+    
 });
