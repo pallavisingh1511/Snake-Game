@@ -14,8 +14,9 @@ $(document).ready(function(){
     //Snake Array
     var snake_array;
     
-    //Inintialize
+    //Initialize
     function init(){
+        d = "right";
         create_snake();
         create_food();
         score = 0;
@@ -59,8 +60,14 @@ $(document).ready(function(){
         else if (d == 'up') ny--;
         else if (d == 'down') ny++;   
         
+        //Collide Code
         if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array)){
-                init();
+                //init();
+                //Insert Final Score
+                $('#final_score').html(score);
+                //Show Overlay
+                $('#overlay').fadeIn(300);
+                alert(score);
                 return;
            }
     
@@ -74,18 +81,21 @@ $(document).ready(function(){
                 tail.x = nx; tail.y = ny;
         }
     
-    snake_array.unshift(tail);
-    
-    for(var i = 0; i < snake_array.length;i++){
-        var c = snake_array[i];
-        paint_cell(c.x, c.y);
-    }
-    
-    //Paint Cell
-    paint_cell( food.x, food.y)
-    
-    //Check Score
-    checkscore(score);
+        snake_array.unshift(tail);
+
+        for(var i = 0; i < snake_array.length;i++){
+            var c = snake_array[i];
+            paint_cell(c.x, c.y);
+        }
+
+        //Paint Cell
+        paint_cell( food.x, food.y)
+
+        //Check Score
+        checkscore(score);
+        
+        //Display Current Score
+        $('#score').html('Your Score: ' + score);
     }
     
     //Create Paint Cell
@@ -105,18 +115,44 @@ $(document).ready(function(){
         return false;
     }
     
-    //Keyboard Controller
-    $(document).keydown(function(e){
-        var key = e.which;
-        if (key == "37" && d != "right") d = "left";
-        else if(key == "38" && d != "down") d = "up";
-        else if(key == "39" && d != "left") d = "right";
-        else if(key == "40" && d != "up") d = "down";
-    });
-    
     //Create checkscore
-    function checkscore(){
+    function checkscore(score){
+        if(localStorage.getItem('highscore') === null){
+            //If there is no high score
+            localStorage.setItem('highscore',score);
+        } else{
+            //If there is a high score
+            if(score > localStorage.getItem('highscore')){
+                 localStorage.setItem('highscore',score);
+            }
+        }
         
+        $('#high_score').html('High Score: ' + localStorage.highscore);
     }
     
+    //Keyboard Controller
+    $(document).keydown(function(e){
+         if ( $('#overlay').css('display') != 'none')
+            {
+                $('#overlay').css('display') = 'none';
+            }
+       
+             var key = e.which;
+            if (key == "37" && d != "right") d = "left";
+            else if(key == "38" && d != "down") d = "up";
+            else if(key == "39" && d != "left") d = "right";
+            else if(key == "40" && d != "up") d = "down";
+               
+    });   
+
+    
 });
+
+//Reset Score
+    function resetScore(){
+        localStorage.highscore = 0;
+        //Display High Score
+        highscorediv = document.getElementById('high_score');
+        
+        highscorediv.innerHTML = 'High Score: 0';
+    }
