@@ -67,7 +67,6 @@ $(document).ready(function(){
                 $('#final_score').html(score);
                 //Show Overlay
                 $('#overlay').fadeIn(300);
-                alert(score);
                 return;
            }
     
