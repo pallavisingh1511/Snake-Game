@@ -9,8 +9,8 @@ $(document).ready(function(){
     var food;
     var score;
     var color = "green";
-    var speed = 130;
-    
+    var speed= 130;
+
     //Snake Array
     var snake_array;
     
@@ -20,8 +20,8 @@ $(document).ready(function(){
         create_snake();
         create_food();
         score = 0;
-        
         if(typeof game_loop != "undefined") clearInterval(game_loop);
+        speed = 130;
         game_loop = setInterval(paint, speed);
     }
     
@@ -102,7 +102,7 @@ $(document).ready(function(){
     function paint_cell(x, y){
         ctx.fillStyle = color;
         ctx.fillRect(x * cw, y * cw, cw, cw);
-        ctx.strokeStyle = "white";
+        ctx.strokeStyle = "#000000";
         ctx.strokeRect(x * cw, y * cw, cw, cw);
     }
     

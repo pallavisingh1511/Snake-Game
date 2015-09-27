@@ -14,7 +14,7 @@ canvas{
 }
 
 .container{
-    margin: 30px auto 0 auto;
+    margin: 100px auto 0 auto;
     width: 605px;
     overflow: auto;
     position: relative;
@@ -31,7 +31,7 @@ canvas{
     overflow: auto;
 }
 
-#score, #high_score{
+#score, #high_score, #expert_level{
     width: 25%;
     height: 50px;
     padding-top: 20px;
@@ -46,6 +46,7 @@ canvas{
 #reset_score{
     padding: 10px;
     float: right;
+	margin-top: 15px;
 }
 
 #overlay{
